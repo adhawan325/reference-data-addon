@@ -43,7 +43,7 @@ public class ReferenceDataServiceBean implements ReferenceDataService {
     {
         Transaction tx = persistence.createTransaction();
         EntityManager entityManager = persistence.getEntityManager();
-        Query query = entityManager.createQuery("select e from nonrda$ReferenceData e where e.referenceCategory.parent.id = :parentId order by e.sortOrder");
+        Query query = entityManager.createQuery("select e from nonrda$ReferenceData e where e.parent.id = :parentId order by e.sortOrder");
         query.setParameter("parentId", parent.getId());
         List<ReferenceData> referenceValues = query.getResultList();
         return referenceValues;
