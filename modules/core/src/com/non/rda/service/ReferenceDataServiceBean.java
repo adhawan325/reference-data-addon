@@ -20,7 +20,7 @@ public class ReferenceDataServiceBean implements ReferenceDataService {
         Transaction tx = persistence.createTransaction();
         EntityManager entityManager = persistence.getEntityManager();
         Query query = entityManager
-                .createQuery("select e from crm$ReferenceData e where e.referenceCode = :code order by e.sortOrder");
+                .createQuery("select e from nonrda$ReferenceData e where e.referenceCode = :code order by e.sortOrder");
         query.setParameter("code", code);
         ReferenceData referenceData = (ReferenceData) query.getFirstResult();
         tx.end();
@@ -32,7 +32,7 @@ public class ReferenceDataServiceBean implements ReferenceDataService {
     {
         Transaction tx = persistence.createTransaction();
         EntityManager entityManager = persistence.getEntityManager();
-        Query query = entityManager.createQuery("select e from crm$ReferenceData e where e.referenceCategory = :category order by e.sortOrder");
+        Query query = entityManager.createQuery("select e from nonrda$ReferenceData e where e.referenceCategory = :category order by e.sortOrder");
         query.setParameter("category", category);
         List<ReferenceData> referenceValues = query.getResultList();
         return referenceValues;
@@ -43,7 +43,7 @@ public class ReferenceDataServiceBean implements ReferenceDataService {
     {
         Transaction tx = persistence.createTransaction();
         EntityManager entityManager = persistence.getEntityManager();
-        Query query = entityManager.createQuery("select e from crm$ReferenceData e where e.referenceCategory.parent.id = :parentId order by e.sortOrder");
+        Query query = entityManager.createQuery("select e from nonrda$ReferenceData e where e.referenceCategory.parent.id = :parentId order by e.sortOrder");
         query.setParameter("parentId", parent.getId());
         List<ReferenceData> referenceValues = query.getResultList();
         return referenceValues;
