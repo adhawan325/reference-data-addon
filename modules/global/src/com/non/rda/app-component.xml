@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.cuba">
+    <module blocks="*"
+            name="global">
+        <artifact appJar="true"
+                  name="nonrda-global"/>
+        <property name="cuba.persistenceConfig"
+                  value="+com/non/rda/persistence.xml"/>
+        <property name="cuba.metadataConfig"
+                  value="+com/non/rda/metadata.xml"/>
+        <property name="cuba.viewsConfig"
+                  value="+com/non/rda/views.xml"/>
+    </module>
+    <module blocks="core"
+            dependsOn="global"
+            name="core">
+        <artifact appJar="true"
+                  name="nonrda-core"/>
+        <artifact classifier="db"
+                  configuration="dbscripts"
+                  ext="zip"
+                  name="nonrda-core"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/non/rda/spring.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.non.rda.core"/>
+    </module>
+    <module blocks="web"
+            dependsOn="global"
+            name="web">
+        <artifact appJar="true"
+                  name="nonrda-web"/>
+        <artifact classifier="web"
+                  configuration="webcontent"
+                  ext="zip"
+                  name="nonrda-web"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/non/rda/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig"
+                  value="+com/non/rda/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig"
+                  value="+com/non/rda/web-screens.xml"/>
+        <property name="cuba.menuConfig"
+                  value="+com/non/rda/web-menu.xml"/>
+        <property name="cuba.permissionConfig"
+                  value="+com/non/rda/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.non.rda.web"/>
+    </module>
+</app-component>
