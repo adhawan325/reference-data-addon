@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.non.rda.entity.ReferenceData"
+          extends="_local"
+          name="referenceData-view">
+        <property name="parent"
+                  view="_minimal">
+            <property name="referenceCategory"/>
+            <property name="referenceCode"/>
+            <property name="sortOrder"/>
+        </property>
+    </view>
+</views>
