@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.UUID;
 
 @Service(ReferenceDataService.NAME)
 public class ReferenceDataServiceBean implements ReferenceDataService {
@@ -34,6 +35,13 @@ public class ReferenceDataServiceBean implements ReferenceDataService {
     public List<ReferenceData> getReferenceDataListByParent(ReferenceData parent) {
         LoadContext<ReferenceData> loadContext = LoadContext.create(ReferenceData.class);
         loadContext.setQuery(new LoadContext.Query("select e from nonrda$ReferenceData e where e.parent.id = :parentId order by e.sortOrder").setParameter("parentId", parent.getId()).setCacheable(true));
+        return dataManager.loadList(loadContext);
+    }
+
+    @Override
+    public List<ReferenceData> getReferenceDataListByParentId(UUID id) {
+        LoadContext<ReferenceData> loadContext = LoadContext.create(ReferenceData.class);
+        loadContext.setQuery(new LoadContext.Query("select e from nonrda$ReferenceData e where e.parent.id = :parentId order by e.sortOrder").setParameter("parentId", id).setCacheable(true));
         return dataManager.loadList(loadContext);
     }
 }
